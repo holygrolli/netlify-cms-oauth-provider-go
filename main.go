@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
 
-	"github.com/gorilla/mux"
 	"github.com/gorilla/pat"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
@@ -57,7 +57,9 @@ func handleMain(res http.ResponseWriter, req *http.Request) {
 }
 
 func handleAuth(res http.ResponseWriter, req *http.Request) {
-	mux.Vars(req)["provider"] = req.FormValue("provider")
+	// Gothic expects the provider to be in a mux value; NetlifyCMS provides it in a form value.
+	// Gothic will accept it in the context, so stick it there.
+	req = req.WithContext(context.WithValue(req.Context(), "provider", req.FormValue("provider")))
 	gothic.BeginAuthHandler(res, req)
 }
 
