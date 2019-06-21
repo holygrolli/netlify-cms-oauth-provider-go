@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gorilla/mux"
 	"github.com/gorilla/pat"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
@@ -55,13 +56,11 @@ func handleMain(res http.ResponseWriter, req *http.Request) {
 	res.Write([]byte(``))
 }
 
-// GET /auth Page  redirecting after provider get param
 func handleAuth(res http.ResponseWriter, req *http.Request) {
-	fmt.Printf("redirect to %s\n", req.FormValue("provider"))
-	http.Redirect(res, req, req.FormValue("provider"), http.StatusTemporaryRedirect)
+	mux.Vars(req)["provider"] = req.FormValue("provider")
+	gothic.BeginAuthHandler(res, req)
 }
 
-// GET /auth/provider  Initial page redirecting by provider
 func handleAuthProvider(res http.ResponseWriter, req *http.Request) {
 	gothic.BeginAuthHandler(res, req)
 }
