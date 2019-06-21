@@ -131,6 +131,7 @@ func init() {
 			os.Getenv("GITHUB_KEY"),
 			os.Getenv("GITHUB_SECRET"),
 			os.Getenv("GITHUB_CALLBACK_URL"),
+			"user", "repo",
 		),
 		bitbucket.New(
 			os.Getenv("BITBUCKET_KEY"), os.Getenv("BITBUCKET_SECRET"),
