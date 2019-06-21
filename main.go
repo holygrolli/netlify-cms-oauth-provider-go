@@ -128,8 +128,9 @@ func init() {
 	}
 	goth.UseProviders(
 		github.New(
-			os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"),
-			fmt.Sprintf("https://%s/callback/github", host),
+			os.Getenv("GITHUB_KEY"),
+			os.Getenv("GITHUB_SECRET"),
+			os.Getenv("GITHUB_CALLBACK_URL"),
 		),
 		bitbucket.New(
 			os.Getenv("BITBUCKET_KEY"), os.Getenv("BITBUCKET_SECRET"),
