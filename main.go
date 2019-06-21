@@ -45,7 +45,7 @@ const (
       "authorizing:" + provider,
       "*"
     );
-  })(%#v, %#v, %s)
+  })(%#v, %#v, %#v)
   </script></head><body></body></html>`
 )
 
