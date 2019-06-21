@@ -45,7 +45,7 @@ const (
       "authorizing:" + provider,
       "*"
     );
-  })(%#v, %#v, %#v)
+  })(%#v, %#v, %s)
   </script></head><body></body></html>`
 )
 
@@ -78,10 +78,10 @@ func handleCallbackProvider(res http.ResponseWriter, req *http.Request) {
 	status = "error"
 	if errProvider != nil {
 		fmt.Printf("provider failed with '%s'\n", errProvider)
-		result = fmt.Sprintf("%s", errProvider)
+		result = fmt.Sprintf("%#v", errProvider)
 	} else if errAuth != nil {
 		fmt.Printf("auth failed with '%s'\n", errAuth)
-		result = fmt.Sprintf("%s", errAuth)
+		result = fmt.Sprintf("%#v", errAuth)
 	} else {
 		fmt.Printf("Logged in as %s user: %s (%s)\n", user.Provider, user.Email, user.AccessToken)
 		status = "success"
